@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northlight Studio — Websites for premium practices</title>
+<meta name="description" content="Northlight Studio designs and builds websites for premium clinics, luxury trades, and design-led practices. Judge the work, not the pitch: every project below is live.">
+<meta property="og:title" content="Northlight Studio">
+<meta property="og:description" content="Websites for premium practices. Every project below is live.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter+Tight:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F6F2;
+    --paper-raised:#FFFFFF;
+    --ink:#16181D;
+    --ink-soft:#4A4F58;
+    --ink-faint:#8B8F98;
+    --north:#3E5C76;        /* north-sky blue, the single accent */
+    --north-deep:#2C4258;
+    --hair:#E3E1DA;
+    --ease:cubic-bezier(0.16,1,0.3,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Inter Tight",system-ui,sans-serif;
+    font-weight:300;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--north);color:var(--paper)}
+  .serif{font-family:"Fraunces",Georgia,serif}
+  .container{max-width:1120px;margin:0 auto;padding:0 24px}
+  a{color:inherit}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--north);outline-offset:3px}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--hair);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .wordmark{font-family:"Fraunces",serif;font-weight:400;font-size:1.05rem;letter-spacing:.01em;text-decoration:none}
+  .wordmark span{color:var(--north)}
+  .nav-links{display:flex;gap:28px;list-style:none}
+  .nav-links a{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--ink-soft);transition:color .3s var(--ease)}
+  .nav-links a:hover{color:var(--ink)}
+
+  /* ---------- hero ---------- */
+  .hero{padding:128px 0 96px}
+  .eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--north);margin-bottom:28px}
+  h1{
+    font-family:"Fraunces",serif;font-weight:300;
+    font-size:clamp(2.6rem,6vw,4.6rem);
+    line-height:1.06;letter-spacing:-0.01em;
+    max-width:17ch;
+  }
+  h1 em{font-style:italic;color:var(--north)}
+  .hero p{max-width:52ch;margin-top:32px;color:var(--ink-soft);font-size:1.05rem}
+  .hero-note{margin-top:40px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+
+  /* ---------- section scaffolding ---------- */
+  section{padding:96px 0}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--hair);padding-top:20px;margin-bottom:56px}
+  .section-head h2{font-family:"Fraunces",serif;font-weight:300;font-size:1.9rem}
+  .section-head .count{font-size:.75rem;letter-spacing:.18em;color:var(--ink-faint)}
+
+  /* ---------- work grid ---------- */
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .work-card{display:block;text-decoration:none;group:card}
+  .cover{
+    aspect-ratio:4/5;border:1px solid var(--hair);border-radius:2px;
+    position:relative;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    transition:border-color .4s var(--ease), transform .5s var(--ease);
+  }
+  .work-card:hover .cover{border-color:var(--north);transform:translateY(-4px)}
+  .cover .mark{font-family:"Fraunces",serif;font-weight:300;text-align:center;padding:0 18px;line-height:1.2}
+  /* per-project vignettes: each cover speaks the client's identity, not ours */
+  .cover--bb{background:linear-gradient(160deg,#111723,#0A0F1C)}
+  .cover--bb .mark{color:#F5F5F1;font-size:1.5rem;letter-spacing:.04em}
+  .cover--bb .mark small{display:block;margin-top:10px;font-family:"Inter Tight";font-size:.62rem;letter-spacing:.3em;color:#C9A961}
+  .cover--aj{background:linear-gradient(165deg,#EFEAE2,#DDD3C4)}
+  .cover--aj .mark{color:#2A2118;font-size:1.45rem}
+  .cover--aj .mark small{display:block;margin-top:10px;font-family:"Inter Tight";font-size:.62rem;letter-spacing:.3em;color:#7A5C3E}
+  .cover--sw{background:#FBFAF7}
+  .cover--sw .mark{color:#1C1C1A;font-size:1.45rem;font-style:italic}
+  .cover--sw .mark small{display:block;margin-top:10px;font-family:"Inter Tight";font-style:normal;font-size:.62rem;letter-spacing:.3em;color:#8B8F98}
+  .work-meta{padding:18px 2px 0}
+  .work-meta h3{font-family:"Fraunces",serif;font-weight:400;font-size:1.15rem}
+  .work-meta p{font-size:.88rem;color:var(--ink-soft);margin-top:6px}
+  .work-meta .live{
+    display:inline-block;margin-top:12px;
+    font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--north);
+    border-bottom:1px solid transparent;transition:border-color .3s var(--ease);
+  }
+  .work-card:hover .live{border-color:var(--north)}
+
+  /* ---------- approach ---------- */
+  .approach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .approach-item{border-top:1px solid var(--hair);padding-top:24px}
+  .approach-item .num{font-family:"Fraunces",serif;font-size:.95rem;color:var(--north);display:block;margin-bottom:14px}
+  .approach-item h3{font-family:"Fraunces",serif;font-weight:400;font-size:1.2rem;margin-bottom:10px}
+  .approach-item p{font-size:.92rem;color:var(--ink-soft)}
+
+  /* ---------- about ---------- */
+  .about-inner{max-width:62ch}
+  .about-inner p{font-size:1.05rem;color:var(--ink-soft)}
+  .about-inner p + p{margin-top:20px}
+
+  /* ---------- contact ---------- */
+  .contact{background:var(--ink);color:var(--paper);border-radius:2px}
+  .contact-inner{padding:80px 56px;display:flex;flex-wrap:wrap;gap:40px;align-items:flex-end;justify-content:space-between}
+  .contact h2{font-family:"Fraunces",serif;font-weight:300;font-size:clamp(1.8rem,3.4vw,2.6rem);max-width:18ch}
+  .contact h2 em{font-style:italic;color:#9FB6CC}
+  .contact a.mail{
+    font-size:1rem;letter-spacing:.02em;text-decoration:none;
+    border-bottom:1px solid #9FB6CC;padding-bottom:4px;color:var(--paper);
+    transition:color .3s var(--ease), border-color .3s var(--ease);
+  }
+  .contact a.mail:hover{color:#9FB6CC}
+  .contact .small{font-size:.8rem;color:#8B95A3;margin-top:14px}
+
+  /* ---------- footer ---------- */
+  footer{padding:48px 0 56px}
+  .foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--hair);padding-top:24px;font-size:.8rem;color:var(--ink-faint)}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .work-card:hover .cover{transform:none}
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 900px){
+    .work-grid,.approach-grid{grid-template-columns:1fr}
+    .cover{aspect-ratio:16/10}
+    .hero{padding:88px 0 64px}
+    section{padding:64px 0}
+    .nav-links{gap:18px}
+    .nav-links li:nth-child(2){display:none}
+    .contact-inner{padding:56px 28px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="wordmark" href="#top">Northlight<span>&nbsp;Studio</span></a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="container hero">
+    <p class="eyebrow reveal">Web design for premium practices</p>
+    <h1 class="reveal">The site is the first room your clients <em>walk into</em>.</h1>
+    <p class="reveal">Northlight Studio designs and builds websites for premium clinics, luxury trades, and design-led practices. Each build gets its own identity, derived from the client's brief, never a template recoloured.</p>
+    <p class="hero-note reveal">Every project below is live. Judge the work.</p>
+  </div>
+
+  <section id="work" class="container">
+    <div class="section-head reveal">
+      <h2>Selected work</h2>
+      <span class="count">01–03</span>
+    </div>
+    <div class="work-grid">
+
+      <a class="work-card reveal" href="https://billion-body-demo.vercel.app" target="_blank" rel="noopener noreferrer">
+        <div class="cover cover--bb">
+          <div class="mark">Billion Body<small>PRIVATE HEALTH · BY APPLICATION</small></div>
+        </div>
+        <div class="work-meta">
+          <h3>Billion Body</h3>
+          <p>UHNW health concierge. Cinematic dark-mode build in Next.js: fifteen-hundred-biomarker positioning, physician-led voice, application-only funnel.</p>
+          <span class="live">View live demo</span>
+        </div>
+      </a>
+
+      <a class="work-card reveal" href="https://ashwell-joinery.vercel.app" target="_blank" rel="noopener noreferrer">
+        <div class="cover cover--aj">
+          <div class="mark">Ashwell Joinery<small>BESPOKE ARCHITECTURAL JOINERY</small></div>
+        </div>
+        <div class="work-meta">
+          <h3>Ashwell Joinery</h3>
+          <p>Luxury trades. An earthy, unhurried workshop site for a joinery brand that turns wood into architecture.</p>
+          <span class="live">View live demo</span>
+        </div>
+      </a>
+
+      <a class="work-card reveal" href="https://studio-wren.vercel.app" target="_blank" rel="noopener noreferrer">
+        <div class="cover cover--sw">
+          <div class="mark">Studio Wren<small>INTERIOR DESIGN · EDITORIAL</small></div>
+        </div>
+        <div class="work-meta">
+          <h3>Studio Wren</h3>
+          <p>Interior design. An editorial, gallery-style portfolio: roman-numeral chapters, full-bleed photography, footnoted prose.</p>
+          <span class="live">View live demo</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section id="approach" class="container">
+    <div class="section-head reveal">
+      <h2>Approach</h2>
+      <span class="count">How it runs</span>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-item reveal">
+        <span class="num">I</span>
+        <h3>Direction before pixels</h3>
+        <p>Structure, visual style, and motion are chosen per client from a written design direction, set by your sector, your tone, and your references. Two clients never receive the same site in different colours.</p>
+      </div>
+      <div class="approach-item reveal">
+        <span class="num">II</span>
+        <h3>Engineered, not decorated</h3>
+        <p>Semantic, accessible, fast. Animation runs on transform and opacity only, holds up at desktop and phone widths, and respects reduced-motion settings. Forms ship against a security checklist.</p>
+      </div>
+      <div class="approach-item reveal">
+        <span class="num">III</span>
+        <h3>Proof over pitch</h3>
+        <p>The first thing you receive is a free homepage concept for your own practice, built before any call. You judge the work itself, on your screen, with your name on it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" aria-label="About">
+    <div class="section-head reveal">
+      <h2>Studio</h2>
+      <span class="count">Gabriel Hossenboccus</span>
+    </div>
+    <div class="about-inner reveal">
+      <p>Northlight Studio is run by Gabriel Hossenboccus. The name comes from the light painters build studios around: cool, even, and honest about what the work actually looks like.</p>
+      <p>The studio works with practices whose rooms already feel premium and whose websites do not. Clinics where patients decide in seconds. Workshops whose craft deserves better than a stock template. Studios whose taste should be visible before the first conversation.</p>
+    </div>
+  </section>
+
+  <section class="container" id="contact">
+    <div class="contact reveal">
+      <div class="contact-inner">
+        <h2>Start with a concept, <em>not a call.</em></h2>
+        <div>
+          <a class="mail" href="mailto:gabrielhossenboccus1@gmail.com?subject=Homepage%20concept%20for%20my%20practice">gabrielhossenboccus1@gmail.com</a>
+          <p class="small">Tell us the practice. A free homepage concept follows.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container foot">
+    <span>© 2026 Northlight Studio</span>
+    <span>Designed and built in-house</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal: IntersectionObserver, transform/opacity only.
+  const items = document.querySelectorAll('.reveal');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    items.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    items.forEach(el => io.observe(el));
+  }
+</script>
+
+</body>
+</html>
