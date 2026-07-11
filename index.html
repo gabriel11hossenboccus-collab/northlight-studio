@@ -10,105 +10,147 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter+Tight:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F7F6F2;
-    --paper-raised:#FFFFFF;
-    --ink:#16181D;
-    --ink-soft:#4A4F58;
-    --ink-faint:#8B8F98;
-    --north:#3E5C76;        /* north-sky blue, the single accent */
-    --north-deep:#2C4258;
-    --hair:#E3E1DA;
+    /* Identity: the aurora — Northlight's namesake. Teal→cyan→violet on crisp white.
+       Depth system: layered tinted shadows, glass, lift/tilt. */
+    --white:#FFFFFF; --snow:#F8FAFB;
+    --teal:#0D9488; --cyan:#06B6D4; --violet:#7C3AED; --violet-deep:#6D28D9;
+    --aurora:linear-gradient(120deg,#0D9488 0%,#06B6D4 45%,#7C3AED 100%);
+    --ink:#101422; --ink-soft:#464D61; --ink-faint:#8A90A3;
+    --hair:#E6E9EE;
     --ease:cubic-bezier(0.16,1,0.3,1);
+    --shadow-sm:0 1px 2px rgba(16,20,34,.05), 0 4px 14px rgba(16,20,34,.06);
+    --shadow-md:0 2px 4px rgba(16,20,34,.05), 0 12px 30px rgba(16,20,34,.09), 0 30px 64px rgba(16,20,34,.08);
+    --shadow-lg:0 2px 6px rgba(16,20,34,.06), 0 18px 44px rgba(16,20,34,.12), 0 54px 110px rgba(16,20,34,.14);
+    --shadow-aurora:0 2px 8px rgba(6,182,212,.18), 0 14px 38px rgba(124,58,237,.22);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
-    background:var(--paper);
+    background:var(--white);
     color:var(--ink);
     font-family:"Inter Tight",system-ui,sans-serif;
-    font-weight:300;
-    font-size:17px;
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
+    font-weight:300; font-size:17px; line-height:1.65;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
   }
-  ::selection{background:var(--north);color:var(--paper)}
+  ::selection{background:var(--violet);color:#fff}
   .serif{font-family:"Fraunces",Georgia,serif}
   .container{max-width:1120px;margin:0 auto;padding:0 24px}
   a{color:inherit}
-  a:focus-visible,button:focus-visible{outline:2px solid var(--north);outline-offset:3px}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
 
-  /* ---------- header ---------- */
-  header{
-    position:sticky;top:0;z-index:50;
-    background:color-mix(in srgb, var(--paper) 88%, transparent);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--hair);
+  .grad-text{background:var(--aurora); -webkit-background-clip:text; background-clip:text; color:transparent}
+
+  /* ---------- header (floating glass) ---------- */
+  header{position:fixed; top:14px; left:0; right:0; z-index:50}
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;height:60px; padding:0 22px;
+    background:rgba(255,255,255,.72); backdrop-filter:blur(18px) saturate(170%); -webkit-backdrop-filter:blur(18px) saturate(170%);
+    border:1px solid rgba(255,255,255,.65); border-radius:16px;
+    box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.8);
   }
-  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .wordmark{font-family:"Fraunces",serif;font-weight:400;font-size:1.05rem;letter-spacing:.01em;text-decoration:none}
-  .wordmark span{color:var(--north)}
-  .nav-links{display:flex;gap:28px;list-style:none}
-  .nav-links a{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--ink-soft);transition:color .3s var(--ease)}
+  .wordmark{font-family:"Fraunces",serif;font-weight:500;font-size:1.05rem;letter-spacing:.01em;text-decoration:none;display:flex;align-items:center;gap:10px}
+  .wordmark i{width:12px;height:12px;border-radius:50%;background:var(--aurora);box-shadow:0 0 0 3px rgba(6,182,212,.18);display:inline-block}
+  .nav-links{display:flex;gap:26px;list-style:none;align-items:center}
+  .nav-links a{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--ink-soft);font-weight:500;transition:color .3s var(--ease)}
   .nav-links a:hover{color:var(--ink)}
+  .nav-links a.pill{
+    background:var(--aurora); color:#fff; padding:10px 20px; border-radius:999px;
+    box-shadow:var(--shadow-aurora), inset 0 1px 0 rgba(255,255,255,.35);
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease)}
+  .nav-links a.pill:hover{color:#fff; transform:translateY(-2px); box-shadow:0 4px 12px rgba(6,182,212,.22), 0 20px 48px rgba(124,58,237,.3), inset 0 1px 0 rgba(255,255,255,.35)}
 
   /* ---------- hero ---------- */
-  .hero{padding:128px 0 96px}
-  .eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--north);margin-bottom:28px}
+  .hero{padding:180px 0 110px; position:relative; overflow:hidden}
+  .hero-aurora{position:absolute; inset:0; pointer-events:none; z-index:0}
+  .hero-aurora::before{content:''; position:absolute; width:58vw; height:44vw; right:-16vw; top:-16vw; border-radius:50%;
+    background:radial-gradient(circle, rgba(6,182,212,.13), transparent 60%); filter:blur(20px)}
+  .hero-aurora::after{content:''; position:absolute; width:44vw; height:36vw; right:8vw; top:6vw; border-radius:50%;
+    background:radial-gradient(circle, rgba(124,58,237,.12), transparent 60%); filter:blur(24px)}
+  .hero-inner{position:relative; z-index:1}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--ink-soft);
+    background:rgba(255,255,255,.7); border:1px solid var(--hair); border-radius:999px; padding:9px 18px; margin-bottom:32px;
+    box-shadow:var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.9); backdrop-filter:blur(8px)}
+  .eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--aurora);display:inline-block}
   h1{
     font-family:"Fraunces",serif;font-weight:300;
-    font-size:clamp(2.6rem,6vw,4.6rem);
-    line-height:1.06;letter-spacing:-0.01em;
+    font-size:clamp(2.7rem,6.2vw,4.8rem);
+    line-height:1.05;letter-spacing:-0.01em;
     max-width:17ch;
   }
-  h1 em{font-style:italic;color:var(--north)}
-  .hero p{max-width:52ch;margin-top:32px;color:var(--ink-soft);font-size:1.05rem}
-  .hero-note{margin-top:40px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+  h1 em{font-style:italic}
+  .hero p{max-width:52ch;margin-top:32px;color:var(--ink-soft);font-size:1.08rem}
+  .hero-note{margin-top:44px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:500}
+  .hero-note b{color:var(--teal)}
 
   /* ---------- section scaffolding ---------- */
-  section{padding:96px 0}
-  .section-head{display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--hair);padding-top:20px;margin-bottom:56px}
-  .section-head h2{font-family:"Fraunces",serif;font-weight:300;font-size:1.9rem}
-  .section-head .count{font-size:.75rem;letter-spacing:.18em;color:var(--ink-faint)}
+  section{padding:100px 0}
+  section.container{padding:100px 24px}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:56px}
+  .section-head h2{font-family:"Fraunces",serif;font-weight:400;font-size:2rem}
+  .section-head .count{font-size:.75rem;letter-spacing:.18em;color:var(--ink-faint);font-weight:500}
+  .section-head::after{display:none}
 
-  /* ---------- work grid ---------- */
-  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-  .work-card{display:block;text-decoration:none;group:card}
+  /* ---------- work grid: lifting 3D cards ---------- */
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px; perspective:1600px}
+  .work-card{display:block;text-decoration:none; border-radius:20px; will-change:transform;
+    transition:transform .5s var(--ease)}
   .cover{
-    aspect-ratio:4/5;border:1px solid var(--hair);border-radius:2px;
+    aspect-ratio:4/5; border-radius:20px;
     position:relative;overflow:hidden;
     display:flex;align-items:center;justify-content:center;
-    transition:border-color .4s var(--ease), transform .5s var(--ease);
+    box-shadow:var(--shadow-md);
+    border:1px solid rgba(255,255,255,.5);
+    transition:box-shadow .5s var(--ease);
   }
-  .work-card:hover .cover{border-color:var(--north);transform:translateY(-4px)}
-  .cover .mark{font-family:"Fraunces",serif;font-weight:300;text-align:center;padding:0 18px;line-height:1.2}
-  /* per-project vignettes: each cover speaks the client's identity, not ours */
+  .work-card:hover .cover{box-shadow:var(--shadow-lg)}
+  .cover .mark{font-family:"Fraunces",serif;font-weight:400;text-align:center;padding:0 18px;line-height:1.2; position:relative; z-index:1}
+  .cover .mark small{display:block;margin-top:10px;font-family:"Inter Tight";font-size:.62rem;letter-spacing:.3em;font-weight:600}
+  /* per-project vignettes — each cover speaks the client's identity */
   .cover--bb{background:linear-gradient(160deg,#111723,#0A0F1C)}
+  .cover--bb::after{content:'';position:absolute;width:70%;height:50%;left:15%;top:-20%;border-radius:50%;background:radial-gradient(circle, rgba(201,169,97,.25), transparent 65%);filter:blur(20px)}
   .cover--bb .mark{color:#F5F5F1;font-size:1.5rem;letter-spacing:.04em}
-  .cover--bb .mark small{display:block;margin-top:10px;font-family:"Inter Tight";font-size:.62rem;letter-spacing:.3em;color:#C9A961}
-  .cover--aj{background:linear-gradient(165deg,#EFEAE2,#DDD3C4)}
-  .cover--aj .mark{color:#2A2118;font-size:1.45rem}
-  .cover--aj .mark small{display:block;margin-top:10px;font-family:"Inter Tight";font-size:.62rem;letter-spacing:.3em;color:#7A5C3E}
-  .cover--sw{background:#FBFAF7}
-  .cover--sw .mark{color:#1C1C1A;font-size:1.45rem;font-style:italic}
-  .cover--sw .mark small{display:block;margin-top:10px;font-family:"Inter Tight";font-style:normal;font-size:.62rem;letter-spacing:.3em;color:#8B8F98}
-  .work-meta{padding:18px 2px 0}
-  .work-meta h3{font-family:"Fraunces",serif;font-weight:400;font-size:1.15rem}
+  .cover--bb .mark small{color:#C9A961}
+  .cover--aj{background:linear-gradient(165deg,#0C3B2E,#082A20)}
+  .cover--aj::after{content:'';position:absolute;width:70%;height:50%;right:-10%;bottom:-15%;border-radius:50%;background:radial-gradient(circle, rgba(255,107,26,.3), transparent 65%);filter:blur(24px)}
+  .cover--aj .mark{color:#F2F7F1;font-size:1.45rem}
+  .cover--aj .mark small{color:#FFB01F}
+  .cover--sw{background:linear-gradient(170deg,#FFFFFF,#F2EDFA)}
+  .cover--sw::after{content:'';position:absolute;width:60%;height:44%;left:-8%;top:-10%;border-radius:50%;background:radial-gradient(circle, rgba(200,240,74,.4), transparent 65%);filter:blur(22px)}
+  .cover--sw .mark{color:#171320;font-size:1.45rem;font-style:italic}
+  .cover--sw .mark small{font-style:normal;color:#6D28D9}
+  .work-meta{padding:20px 6px 0}
+  .work-meta h3{font-family:"Fraunces",serif;font-weight:500;font-size:1.15rem}
   .work-meta p{font-size:.88rem;color:var(--ink-soft);margin-top:6px}
   .work-meta .live{
-    display:inline-block;margin-top:12px;
-    font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--north);
+    display:inline-block;margin-top:14px;
+    font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+    background:var(--aurora); -webkit-background-clip:text; background-clip:text; color:transparent;
     border-bottom:1px solid transparent;transition:border-color .3s var(--ease);
   }
-  .work-card:hover .live{border-color:var(--north)}
+  .work-card:hover .live{border-color:var(--violet)}
 
-  /* ---------- approach ---------- */
-  .approach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-  .approach-item{border-top:1px solid var(--hair);padding-top:24px}
-  .approach-item .num{font-family:"Fraunces",serif;font-size:.95rem;color:var(--north);display:block;margin-bottom:14px}
-  .approach-item h3{font-family:"Fraunces",serif;font-weight:400;font-size:1.2rem;margin-bottom:10px}
+  /* ---------- approach: glass cards ---------- */
+  .approach{position:relative; overflow:hidden}
+  .approach-bg{position:absolute; inset:0; pointer-events:none}
+  .approach-bg::before{content:''; position:absolute; width:40vw; height:40vw; left:-16vw; top:10%; border-radius:50%;
+    background:radial-gradient(circle, rgba(13,148,136,.10), transparent 60%); filter:blur(24px)}
+  .approach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px; position:relative; z-index:1}
+  .approach-item{
+    background:rgba(255,255,255,.75); backdrop-filter:blur(10px);
+    border:1px solid var(--hair); border-radius:20px; padding:32px 28px;
+    box-shadow:var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.9);
+    transition:transform .5s var(--ease), box-shadow .5s var(--ease)}
+  .approach-item:hover{transform:translateY(-6px); box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.9)}
+  .approach-item .num{
+    display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:12px;
+    font-family:"Fraunces",serif;font-size:.95rem;color:#fff;background:var(--aurora);margin-bottom:18px;
+    box-shadow:var(--shadow-aurora), inset 0 1px 0 rgba(255,255,255,.3)}
+  .approach-item h3{font-family:"Fraunces",serif;font-weight:500;font-size:1.2rem;margin-bottom:10px}
   .approach-item p{font-size:.92rem;color:var(--ink-soft)}
 
   /* ---------- about ---------- */
@@ -117,38 +159,48 @@
   .about-inner p + p{margin-top:20px}
 
   /* ---------- contact ---------- */
-  .contact{background:var(--ink);color:var(--paper);border-radius:2px}
-  .contact-inner{padding:80px 56px;display:flex;flex-wrap:wrap;gap:40px;align-items:flex-end;justify-content:space-between}
-  .contact h2{font-family:"Fraunces",serif;font-weight:300;font-size:clamp(1.8rem,3.4vw,2.6rem);max-width:18ch}
-  .contact h2 em{font-style:italic;color:#9FB6CC}
+  .contact{
+    background:linear-gradient(135deg,#0F172A 0%,#131B33 55%,#1E1638 100%);
+    color:#fff;border-radius:28px; position:relative; overflow:hidden;
+    box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.1)}
+  .contact::before{content:''; position:absolute; width:520px; height:520px; border-radius:50%;
+    background:radial-gradient(circle, rgba(6,182,212,.22), transparent 62%); filter:blur(30px); top:-200px; right:-120px}
+  .contact::after{content:''; position:absolute; width:420px; height:420px; border-radius:50%;
+    background:radial-gradient(circle, rgba(124,58,237,.28), transparent 62%); filter:blur(30px); bottom:-180px; left:-100px}
+  .contact-inner{padding:84px 56px;display:flex;flex-wrap:wrap;gap:40px;align-items:flex-end;justify-content:space-between; position:relative; z-index:1}
+  .contact h2{font-family:"Fraunces",serif;font-weight:300;font-size:clamp(1.8rem,3.4vw,2.7rem);max-width:18ch}
+  .contact h2 em{font-style:italic; background:linear-gradient(120deg,#5EEAD4,#8B5CF6); -webkit-background-clip:text; background-clip:text; color:transparent}
   .contact a.mail{
-    font-size:1rem;letter-spacing:.02em;text-decoration:none;
-    border-bottom:1px solid #9FB6CC;padding-bottom:4px;color:var(--paper);
-    transition:color .3s var(--ease), border-color .3s var(--ease);
+    display:inline-block; font-size:.95rem;letter-spacing:.02em;text-decoration:none;color:#fff;font-weight:500;
+    background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22); border-radius:999px; padding:15px 30px;
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    box-shadow:0 8px 28px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.25);
+    transition:transform .4s var(--ease), background .4s var(--ease);
   }
-  .contact a.mail:hover{color:#9FB6CC}
-  .contact .small{font-size:.8rem;color:#8B95A3;margin-top:14px}
+  .contact a.mail:hover{transform:translateY(-3px); background:rgba(255,255,255,.18)}
+  .contact .small{font-size:.8rem;color:#96A0B5;margin-top:14px}
 
   /* ---------- footer ---------- */
   footer{padding:48px 0 56px}
   .foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--hair);padding-top:24px;font-size:.8rem;color:var(--ink-faint)}
 
   /* ---------- reveal ---------- */
-  .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
   .reveal.in{opacity:1;transform:none}
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto}
     .reveal{opacity:1;transform:none;transition:none}
-    .work-card:hover .cover{transform:none}
+    .work-card:hover .cover,.approach-item:hover{transform:none}
   }
 
   /* ---------- responsive ---------- */
   @media (max-width: 900px){
     .work-grid,.approach-grid{grid-template-columns:1fr}
     .cover{aspect-ratio:16/10}
-    .hero{padding:88px 0 64px}
+    .hero{padding:150px 0 70px}
     section{padding:64px 0}
-    .nav-links{gap:18px}
+    section.container{padding:64px 24px}
+    .nav-links{gap:16px}
     .nav-links li:nth-child(2){display:none}
     .contact-inner{padding:56px 28px}
   }
@@ -157,25 +209,30 @@
 <body>
 
 <header>
-  <div class="container nav">
-    <a class="wordmark" href="#top">Northlight<span>&nbsp;Studio</span></a>
-    <nav aria-label="Primary">
-      <ul class="nav-links">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#approach">Approach</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+  <div class="container">
+    <div class="nav">
+      <a class="wordmark" href="#top"><i></i>Northlight&nbsp;Studio</a>
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="#work">Work</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a class="pill" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </header>
 
 <main id="top">
 
-  <div class="container hero">
-    <p class="eyebrow reveal">Web design for premium practices</p>
-    <h1 class="reveal">The site is the first room your clients <em>walk into</em>.</h1>
-    <p class="reveal">Northlight Studio designs and builds websites for premium clinics, luxury trades, and design-led practices. Each build gets its own identity, derived from the client's brief, never a template recoloured.</p>
-    <p class="hero-note reveal">Every project below is live. Judge the work.</p>
+  <div class="hero">
+    <div class="hero-aurora" id="hero-aurora"></div>
+    <div class="container hero-inner">
+      <p class="eyebrow reveal"><i></i>Web design for premium practices</p>
+      <h1 class="reveal">The site is the first room your clients <em class="grad-text">walk into</em>.</h1>
+      <p class="reveal">Northlight Studio designs and builds websites for premium clinics, luxury trades, and design-led practices. Each build gets its own identity, derived from the client's brief, never a template recoloured.</p>
+      <p class="hero-note reveal">Every project below is <b>live</b>. Judge the work.</p>
+    </div>
   </div>
 
   <section id="work" class="container">
@@ -185,7 +242,7 @@
     </div>
     <div class="work-grid">
 
-      <a class="work-card reveal" href="https://billion-body-demo.vercel.app" target="_blank" rel="noopener noreferrer">
+      <a class="work-card reveal tilt" href="https://billion-body-demo.vercel.app" target="_blank" rel="noopener noreferrer">
         <div class="cover cover--bb">
           <div class="mark">Billion Body<small>PRIVATE HEALTH · BY APPLICATION</small></div>
         </div>
@@ -196,24 +253,24 @@
         </div>
       </a>
 
-      <a class="work-card reveal" href="https://ashwell-joinery.vercel.app" target="_blank" rel="noopener noreferrer">
+      <a class="work-card reveal tilt" href="https://ashwell-joinery.vercel.app" target="_blank" rel="noopener noreferrer">
         <div class="cover cover--aj">
           <div class="mark">Ashwell Joinery<small>BESPOKE ARCHITECTURAL JOINERY</small></div>
         </div>
         <div class="work-meta">
           <h3>Ashwell Joinery</h3>
-          <p>Luxury trades. An earthy, unhurried workshop site for a joinery brand that turns wood into architecture.</p>
+          <p>Luxury trades. Racing green and tangerine on a white gallery ground — a workshop site with the confidence of the joinery itself.</p>
           <span class="live">View live demo</span>
         </div>
       </a>
 
-      <a class="work-card reveal" href="https://studio-wren.vercel.app" target="_blank" rel="noopener noreferrer">
+      <a class="work-card reveal tilt" href="https://studio-wren.vercel.app" target="_blank" rel="noopener noreferrer">
         <div class="cover cover--sw">
           <div class="mark">Studio Wren<small>INTERIOR DESIGN · EDITORIAL</small></div>
         </div>
         <div class="work-meta">
           <h3>Studio Wren</h3>
-          <p>Interior design. An editorial, gallery-style portfolio: roman-numeral chapters, full-bleed photography, footnoted prose.</p>
+          <p>Interior design. A white-wall gallery in electric violet and chartreuse: framed photography, roman-numeral chapters, footnoted prose.</p>
           <span class="live">View live demo</span>
         </div>
       </a>
@@ -221,26 +278,29 @@
     </div>
   </section>
 
-  <section id="approach" class="container">
-    <div class="section-head reveal">
-      <h2>Approach</h2>
-      <span class="count">How it runs</span>
-    </div>
-    <div class="approach-grid">
-      <div class="approach-item reveal">
-        <span class="num">I</span>
-        <h3>Direction before pixels</h3>
-        <p>Structure, visual style, and motion are chosen per client from a written design direction, set by your sector, your tone, and your references. Two clients never receive the same site in different colours.</p>
+  <section id="approach" class="approach">
+    <div class="approach-bg"></div>
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>Approach</h2>
+        <span class="count">How it runs</span>
       </div>
-      <div class="approach-item reveal">
-        <span class="num">II</span>
-        <h3>Engineered, not decorated</h3>
-        <p>Semantic, accessible, fast. Animation runs on transform and opacity only, holds up at desktop and phone widths, and respects reduced-motion settings. Forms ship against a security checklist.</p>
-      </div>
-      <div class="approach-item reveal">
-        <span class="num">III</span>
-        <h3>Proof over pitch</h3>
-        <p>The first thing you receive is a free homepage concept for your own practice, built before any call. You judge the work itself, on your screen, with your name on it.</p>
+      <div class="approach-grid">
+        <div class="approach-item reveal">
+          <span class="num">I</span>
+          <h3>Direction before pixels</h3>
+          <p>Structure, visual style, and motion are chosen per client from a written design direction, set by your sector, your tone, and your references. Two clients never receive the same site in different colours.</p>
+        </div>
+        <div class="approach-item reveal">
+          <span class="num">II</span>
+          <h3>Engineered, not decorated</h3>
+          <p>Semantic, accessible, fast. Animation runs on transform and opacity only, holds up at desktop and phone widths, and respects reduced-motion settings. Forms ship against a security checklist.</p>
+        </div>
+        <div class="approach-item reveal">
+          <span class="num">III</span>
+          <h3>Proof over pitch</h3>
+          <p>The first thing you receive is a free homepage concept for your own practice, built before any call. You judge the work itself, on your screen, with your name on it.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -278,15 +338,41 @@
 </footer>
 
 <script>
-  // Scroll reveal: IntersectionObserver, transform/opacity only.
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const items = document.querySelectorAll('.reveal');
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (reduced) {
     items.forEach(el => el.classList.add('in'));
   } else {
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const siblings = Array.from(e.target.parentElement.children).filter(c => c.classList.contains('reveal'));
+          const idx = siblings.indexOf(e.target);
+          e.target.style.transitionDelay = Math.min(idx * 90, 270) + 'ms';
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
     }, { threshold: 0.12 });
     items.forEach(el => io.observe(el));
+
+    // 3D tilt on work cards
+    document.querySelectorAll('.tilt').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `rotateY(${x * 6}deg) rotateX(${y * -6}deg) translateY(-6px)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+
+    // aurora parallax
+    const aurora = document.getElementById('hero-aurora');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) aurora.style.transform = `translateY(${y * 0.28}px)`;
+    }, { passive: true });
   }
 </script>
 
